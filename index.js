@@ -93,5 +93,4 @@ app.get('*', (request, response) => {
   }
 });
 
-// eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`Server started at ${PORT}`));
