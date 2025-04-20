@@ -35,10 +35,11 @@ const moneyManager = new MoneyManager();
 moneyManager.addMoneyCallback = (data) => {
   ApiConnector.addMoney(data, (response) => {
     if (response.success) {
-      profileWidget.showProfile(response.data.user);
-      moneyManager.setMessage("Баланс успешно пополнен");
+      moneyManager.setMessage(true, "Средства успешно зачислены!");
+      setTimeout(function() {
+        location.reload(); }, 3000);
     } else {
-      moneyManager.setMessage(response.error);
+      moneyManager.setMessage(false, "не удалось зачислить средства");
     }
   });
 };
@@ -46,10 +47,11 @@ moneyManager.addMoneyCallback = (data) => {
 moneyManager.conversionMoneyCallback = (data) => {
   ApiConnector.convertMoney(data, (response) => {
     if (response.success) {
-      profileWidget.showProfile(response.data.user);
-      moneyManager.setMessage("Валюта успешно конвертирована!");
+      moneyManager.setMessage(true, "Валюта успешно конвертирована!");
+      setTimeout(function() {
+        location.reload(); }, 3000);
     } else {
-      moneyManager.setMessage(response.error);
+      moneyManager.setMessage(false, "неудачная попытка конвертации");
     }
   });
 };
@@ -57,10 +59,11 @@ moneyManager.conversionMoneyCallback = (data) => {
 moneyManager.sendMoneyCallback = (data) => {
   ApiConnector.transferMoney(data, (response) => {
     if (response.success) {
-      profileWidget.showProfile(response.data.sender);
-      moneyManager.setMessage("Перевод успешно осуществлен");
+      moneyManager.setMessage(true, "Перевод успешно осуществлен");
+      setTimeout(function() {
+        location.reload(); }, 3000);
     } else {
-      moneyManager.setMessage(response.error);
+      moneyManager.setMessage(false, "не выбран пользователь");
     }
   });
 };
@@ -78,9 +81,9 @@ favoritesWidget.addUserCallback = (userId) => {
   ApiConnector.addUserToFavorites(userId, (response) => {
     if (response.success) {
       favoritesWidget.fillTable(response.data);
-      favoritesWidget.setMessage('Пользователь успешно добавлен в избранное.');
+      favoritesWidget.setMessage(true, "Поьзователь успешно добавлен");
     } else {
-      favoritesWidget.setMessage(response.error);
+      favoritesWidget.setMessage(false, "Пользователь не найден");
     }
   });
 };
@@ -90,10 +93,9 @@ favoritesWidget.removeUserCallback = (userId) => {
     if (response.success) {
       favoritesWidget.clearTable();
       favoritesWidget.fillTable(response.data); 
-      favoritesWidget.setMessage('Пользователь удален из избранного.');
-      console.log('Пользователь удален из избранного.')
+      favoritesWidget.setMessage(true, "Пользователь удален из избранного.");
     } else {
-      favoritesWidget.setMessage(response.error);
+      favoritesWidget.setMessage(false, "Не удалось удалить");
     }
   });
 };

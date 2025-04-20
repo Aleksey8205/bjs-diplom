@@ -5,10 +5,9 @@ const userForm = new UserForm();
 userForm.loginFormCallback = function(data) {
     ApiConnector.login(data, response => {
         if (response.success) {
-            console.log(response);  
             location.reload();  
         } else {
-            alert(response.error); 
+           this.setLoginErrorMessage("неверно указан логин или пароль")
         }
     });
 };
@@ -16,9 +15,11 @@ userForm.loginFormCallback = function(data) {
 userForm.registerFormCallback = function(data) {
     ApiConnector.register(data, response => {
         if (response.success) {
-            console.log(response);
+            this.setRegisterErrorMessage("регистрация успешно");
+            setTimeout(function() {
+                location.reload(); }, 2000);
         } else {
-            alert(responce.error)
+            this.setRegisterErrorMessage("не удалось зарегистрироваться")
         }
     }
 )};
