@@ -18,7 +18,7 @@ function updateProfile() {
   });
 }
 
-setInterval(updateProfile, 60 * 1000);
+setInterval(updateProfile, 60000);
 updateProfile();
 
 const ratesBoard = new RatesBoard();
