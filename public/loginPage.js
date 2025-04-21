@@ -7,7 +7,7 @@ userForm.loginFormCallback = function(data) {
         if (response.success) {
             location.reload();  
         } else {
-           this.setLoginErrorMessage("неверно указан логин или пароль")
+            userForm.setLoginErrorMessage(response.error);
         }
     });
 };
@@ -15,14 +15,9 @@ userForm.loginFormCallback = function(data) {
 userForm.registerFormCallback = function(data) {
     ApiConnector.register(data, response => {
         if (response.success) {
-            this.setRegisterErrorMessage("регистрация успешно");
-            setTimeout(function() {
-                location.reload(); }, 2000);
+            location.reload(); 
         } else {
-            this.setRegisterErrorMessage("не удалось зарегистрироваться")
+            userForm.setRegisterErrorMessage(response.error);
         }
     }
 )};
-
-
-
